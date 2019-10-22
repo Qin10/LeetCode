@@ -27,22 +27,14 @@ class Solution(object):
         :type strs: List[str]
         :rtype: List[List[str]]
         """
-        lst = []
-        res = []
-        temp = []
-        for i in range(len(strs)):
-            dic = {}
-            for s in strs[i]:
-                if s not in dic:
-                    dic[s] = 1
-                else:
-                    dic[s] += 1
-            lst.append(dic)
-            if lst[i] not in temp:
-                temp.append(lst[i])
-                res.append([strs[i]])
+        dic = {}
+        for s in strs:
+            temp = list(s)
+            temp.sort()
+            if tuple(temp) in dic:
+                dic[tuple(temp)].append(s)
             else:
-                res[temp.index(lst[i])].append(strs[i])
-        return res
+                dic[tuple(temp)] = [s]
+        return dic.values()
 
 # leetcode submit region end(Prohibit modification and deletion)
